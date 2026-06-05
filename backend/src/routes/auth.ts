@@ -2,6 +2,7 @@ import { Router } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { getDb } from '../database'
+import { sendTelegram } from '../telegram'
 
 const router = Router()
 
@@ -43,6 +44,8 @@ router.post('/register', async (req, res) => {
       process.env.JWT_SECRET || 'secret',
       { expiresIn: '7d' }
     )
+
+    sendTelegram(`🆕 <b>新用戶註冊</b>\n👤 ${name}\n📧 ${email}`)
 
     res.json({
       token,

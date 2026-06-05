@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { getDb } from '../database'
+import { sendTelegram } from '../telegram'
 
 const router = Router()
 
@@ -36,6 +37,8 @@ router.post('/', async (req, res) => {
       'INSERT INTO guestbook (name, email, message) VALUES (?, ?, ?)',
       [name.trim(), email.trim(), message.trim()]
     )
+
+    sendTelegram(`💬 <b>新留言</b>\n👤 ${name.trim()} (${email.trim()})\n📝 ${message.trim().slice(0, 200)}`)
 
     res.status(201).json({
       id: result.lastID,
