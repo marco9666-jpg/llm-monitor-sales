@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://你的後端網址/api/$1" }
+    { "source": "/api/(.*)", "destination": "https://tokenmeter-backend.onrender.com/api/$1" }
   ]
 }
