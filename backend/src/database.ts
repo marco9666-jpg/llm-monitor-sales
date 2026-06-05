@@ -1,8 +1,15 @@
 import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
 import path from 'path'
+import fs from 'fs'
 
-const DB_PATH = path.join(__dirname, '..', '..', 'database', 'app.db')
+const DB_DIR = path.join(__dirname, '..', '..', 'database')
+const DB_PATH = path.join(DB_DIR, 'app.db')
+
+// 自動建立目錄（Render 部署時不存在此目錄）
+if (!fs.existsSync(DB_DIR)) {
+  fs.mkdirSync(DB_DIR, { recursive: true })
+}
 
 let db: Database<sqlite3.Database, sqlite3.Statement> | null = null
 
