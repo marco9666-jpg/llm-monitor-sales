@@ -1,51 +1,35 @@
 import { Router } from 'express'
-import { getDb } from '../database'
+import { db } from '../firebase'
 import { sendTelegram } from '../telegram'
 
 const router = Router()
 
-// GET /api/guestbook - 取得所有留言（最新在前）
 router.get('/', async (_req, res) => {
   try {
-    const db = await getDb()
-    const entries = await db.all(
-      'SELECT * FROM guestbook ORDER BY created_at DESC LIMIT 200'
-    )
+    const snap = await db.collection('guestbook').orderBy('created_at', 'desc').limit(200).get()
+    const entries = snap.docs.map(d => ({ id: d.id, ...d.data() }))
     res.json({ entries })
   } catch (err: any) {
     res.status(500).json({ error: err.message })
   }
 })
 
-// POST /api/guestbook - 新增留言
 router.post('/', async (req, res) => {
   try {
     const { name, email, message } = req.body
-
     if (!name || !email || !message) {
-      res.status(400).json({ error: 'Name, email and message are required' })
-      return
+      res.status(400).json({ error: 'Name, email and message are required' }); return
     }
-
     if (name.length > 100 || email.length > 200 || message.length > 2000) {
-      res.status(400).json({ error: 'Input too long' })
-      return
+      res.status(400).json({ error: 'Input too long' }); return
     }
 
-    const db = await getDb()
-    const result = await db.run(
-      'INSERT INTO guestbook (name, email, message) VALUES (?, ?, ?)',
-      [name.trim(), email.trim(), message.trim()]
-    )
+    const data = { name: name.trim(), email: email.trim(), message: message.trim(), created_at: new Date().toISOString() }
+    const ref = await db.collection('guestbook').add(data)
 
-    sendTelegram(`💬 <b>新留言</b>\n👤 ${name.trim()} (${email.trim()})\n📝 ${message.trim().slice(0, 200)}`)
+    sendTelegram(`💬 <b>新留言</b>\n👤 ${data.name} (${data.email})\n📝 ${data.message.slice(0, 200)}`)
 
-    res.status(201).json({
-      id: result.lastID,
-      name: name.trim(),
-      email: email.trim(),
-      message: message.trim(),
-    })
+    res.status(201).json({ id: ref.id, ...data })
   } catch (err: any) {
     res.status(500).json({ error: err.message })
   }

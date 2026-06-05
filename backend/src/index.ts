@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { initDatabase } from './database'
 import authRoutes from './routes/auth'
 import licenseRoutes from './routes/licenses'
 import guestbookRoutes from './routes/guestbook'
@@ -28,12 +27,6 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
-
-async function start() {
-  await initDatabase()
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`)
-  })
-}
-
-start().catch(console.error)
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
+})
