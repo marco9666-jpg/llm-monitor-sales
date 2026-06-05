@@ -24,6 +24,7 @@ export default function Login() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        signal: AbortSignal.timeout(40000),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || t('login.error'))
@@ -32,7 +33,11 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(data.user))
       navigate('/')
     } catch (err: any) {
-      setError(err.message)
+      if (err.name === 'TimeoutError') {
+        setError('伺服器喚醒中，請稍後再試（最多 30 秒）')
+      } else {
+        setError(err.message)
+      }
     } finally {
       setLoading(false)
     }
