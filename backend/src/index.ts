@@ -27,6 +27,21 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+// POST /api/downloads - record a download click (no auth required)
+app.post('/api/downloads', async (_req, res) => {
+  try {
+    const { db } = await import('./firebase')
+    const ref = db.collection('meta').doc('downloads')
+    await db.runTransaction(async (tx) => {
+      const doc = await tx.get(ref)
+      tx.set(ref, { count: (doc.exists ? doc.data()!.count : 0) + 1 }, { merge: true })
+    })
+    res.json({ ok: true })
+  } catch {
+    res.json({ ok: true }) // 失敗靜默忽略，不影響下載
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 })

@@ -9,6 +9,7 @@ import {
   LogOut,
   Send,
   Trash2,
+  Download,
   ArrowLeft,
   BarChart3,
   Shield,
@@ -23,6 +24,7 @@ interface Stats {
   entries: number
   subscribers: number
   notifications: number
+  downloads: number
 }
 
 interface UserItem {
@@ -252,6 +254,15 @@ export default function AdminDashboard() {
                     <span className="text-sm text-neutral-500">{t('admin.statsNotifications')}</span>
                   </div>
                   <p className="text-2xl font-semibold text-white">{stats.notifications}</p>
+                </div>
+                <div className="rounded-2xl border border-white/5 bg-neutral-900/50 p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/10">
+                      <Download className="h-4 w-4 text-purple-400" />
+                    </div>
+                    <span className="text-sm text-neutral-500">下載次數</span>
+                  </div>
+                  <p className="text-2xl font-semibold text-white">{stats.downloads ?? 0}</p>
                 </div>
               </div>
             )}

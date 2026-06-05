@@ -8,17 +8,19 @@ router.use(adminMiddleware)
 
 router.get('/stats', async (_req, res) => {
   try {
-    const [users, entries, subs, notifs] = await Promise.all([
+    const [users, entries, subs, notifs, dlDoc] = await Promise.all([
       db.collection('users').count().get(),
       db.collection('guestbook').count().get(),
       db.collection('subscriptions').where('active', '==', true).count().get(),
       db.collection('notifications').count().get(),
+      db.collection('meta').doc('downloads').get(),
     ])
     res.json({ stats: {
       users: users.data().count,
       entries: entries.data().count,
       subscribers: subs.data().count,
       notifications: notifs.data().count,
+      downloads: dlDoc.exists ? dlDoc.data()!.count : 0,
     }})
   } catch (err: any) {
     res.status(500).json({ error: err.message })

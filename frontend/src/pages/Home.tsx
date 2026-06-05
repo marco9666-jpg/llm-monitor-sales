@@ -4,6 +4,12 @@ import { Shield, Zap, Lock, Server, BarChart3, Eye, Download, MessageSquare, Bel
 import { useI18n } from '../i18n/I18nContext'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 
+const DOWNLOAD_URL = 'https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg'
+
+function trackDownload() {
+  fetch('/api/downloads', { method: 'POST' }).catch(() => {})
+}
+
 export default function Home() {
   const { t } = useI18n()
 
@@ -67,7 +73,7 @@ export default function Home() {
               {t('nav.login')}
             </Link>
             <a
-              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
+              href={DOWNLOAD_URL} onClick={trackDownload}
               className="rounded-full bg-white px-4 py-2 sm:px-5 text-sm font-medium text-neutral-950 hover:bg-neutral-200 transition-colors duration-300 whitespace-nowrap"
             >
               {t('nav.getStarted')}
@@ -97,7 +103,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
+              href={DOWNLOAD_URL} onClick={trackDownload}
               className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-8 py-3.5 text-base font-medium text-white hover:bg-blue-400 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               <Download className="h-5 w-5" />
@@ -238,7 +244,7 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
+              href={DOWNLOAD_URL} onClick={trackDownload}
               className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-10 py-4 text-base font-medium text-white hover:bg-blue-400 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               <Download className="h-5 w-5" />
