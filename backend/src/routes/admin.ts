@@ -56,6 +56,21 @@ router.get('/entries', async (_req, res) => {
   }
 })
 
+// DELETE /api/admin/entries/:id - Delete a guestbook entry
+router.delete('/entries/:id', async (req, res) => {
+  try {
+    const db = await getDb()
+    const { changes } = await db.run('DELETE FROM guestbook WHERE id = ?', [req.params.id])
+    if (changes === 0) {
+      res.status(404).json({ error: 'Entry not found' })
+      return
+    }
+    res.json({ ok: true })
+  } catch (err: any) {
+    res.status(500).json({ error: err.message })
+  }
+})
+
 // GET /api/admin/subscribers - List all subscribers
 router.get('/subscribers', async (_req, res) => {
   try {

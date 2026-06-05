@@ -8,6 +8,7 @@ import {
   Bell,
   LogOut,
   Send,
+  Trash2,
   ArrowLeft,
   BarChart3,
   Shield,
@@ -338,10 +339,25 @@ export default function AdminDashboard() {
                           <span className="text-sm font-medium text-white">{entry.name}</span>
                           <span className="text-xs text-neutral-600">{entry.email}</span>
                         </div>
-                        <span className="text-xs text-neutral-600 flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatDate(entry.created_at)}
-                        </span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-neutral-600 flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {formatDate(entry.created_at)}
+                          </span>
+                          <button
+                            onClick={async () => {
+                              if (!confirm('確定刪除這則留言？')) return
+                              await fetch(`${API_URL}/admin/entries/${entry.id}`, {
+                                method: 'DELETE',
+                                headers: authHeaders,
+                              })
+                              setEntries(prev => prev.filter(e => e.id !== entry.id))
+                            }}
+                            className="text-neutral-600 hover:text-red-400 transition-colors"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
                       </div>
                       <p className="text-sm text-neutral-300 leading-relaxed">{entry.message}</p>
                     </div>
