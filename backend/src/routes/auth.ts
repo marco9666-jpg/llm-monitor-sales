@@ -22,9 +22,10 @@ router.post('/register', async (req, res) => {
     }
 
     const hashed = await bcrypt.hash(password, 10)
+    const role = process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
     const result = await db.run(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, hashed]
+      'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+      [name, email, hashed, role]
     )
 
     const userId = result.lastID
