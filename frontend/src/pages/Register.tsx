@@ -31,7 +31,7 @@ export default function Register() {
 
       localStorage.setItem('token', data.token)
       localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/dashboard')
+      navigate('/')
     } catch (err: any) {
       setError(err.message)
     } finally {
