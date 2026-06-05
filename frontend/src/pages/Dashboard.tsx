@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { LogOut, User, MessageSquare, Download, Heart } from 'lucide-react'
-import GitHubIcon from '../components/GitHubIcon'
 import { useI18n } from '../i18n/I18nContext'
 
 const API_URL = '/api'
@@ -113,18 +112,6 @@ export default function Dashboard() {
             <p className="text-sm text-neutral-500">{t('dashboard.feedbackDesc')}</p>
           </Link>
 
-          <a
-            href="https://github.com/marco9666-jpg/TokenMeter"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group rounded-3xl border border-white/10 bg-neutral-900/50 p-6 hover:border-green-500/30 hover:bg-green-500/5 transition-all duration-300 block"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/10 mb-4 group-hover:bg-green-500/20 transition-colors duration-300">
-              <GitHubIcon className="h-5 w-5 text-green-400" />
-            </div>
-            <h3 className="text-base font-medium text-white mb-1">{t('dashboard.download')}</h3>
-            <p className="text-sm text-neutral-500">{t('dashboard.downloadDesc')}</p>
-          </a>
         </div>
       </main>
     </div>

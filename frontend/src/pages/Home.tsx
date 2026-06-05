@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Shield, Zap, Lock, Server, BarChart3, Eye, Download, MessageSquare, Bell, Check } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 import LanguageSwitcher from '../components/LanguageSwitcher'
-import GitHubIcon from '../components/GitHubIcon'
 
 export default function Home() {
   const { t } = useI18n()
@@ -61,15 +60,6 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <a
-              href="https://github.com/marco9666-jpg/TokenMeter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-neutral-400 hover:text-white transition-colors duration-300"
-              title="GitHub"
-            >
-              <GitHubIcon className="h-5 w-5" />
-            </a>
             <Link to="/guestbook" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
               {t('nav.feedback')}
             </Link>
@@ -113,15 +103,6 @@ export default function Home() {
               <Download className="h-5 w-5" />
               {t('hero.cta1')}
             </Link>
-            <a
-              href="https://github.com/marco9666-jpg/TokenMeter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
-            >
-              <GitHubIcon className="h-5 w-5" />
-              Open Source
-            </a>
             <Link
               to="/guestbook"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
@@ -263,15 +244,6 @@ export default function Home() {
               <Download className="h-5 w-5" />
               {t('cta.button')}
             </Link>
-            <a
-              href="https://github.com/marco9666-jpg/TokenMeter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-10 py-4 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
-            >
-              <GitHubIcon className="h-5 w-5" />
-              GitHub
-            </a>
             <Link
               to="/guestbook"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-10 py-4 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
@@ -290,15 +262,6 @@ export default function Home() {
             {t('footer.copy')}
           </p>
           <div className="flex gap-6 text-xs text-neutral-600">
-            <a
-              href="https://github.com/marco9666-jpg/TokenMeter"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 hover:text-neutral-400 transition-colors"
-            >
-              <GitHubIcon className="h-3.5 w-3.5" />
-              GitHub
-            </a>
             <Link to="/guestbook" className="hover:text-neutral-400 transition-colors">{t('nav.feedback')}</Link>
             <Link to="/login" className="hover:text-neutral-400 transition-colors">{t('footer.login')}</Link>
             <Link to="/register" className="hover:text-neutral-400 transition-colors">{t('footer.register')}</Link>
