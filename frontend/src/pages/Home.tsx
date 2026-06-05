@@ -66,12 +66,12 @@ export default function Home() {
             <Link to="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
               {t('nav.login')}
             </Link>
-            <Link
-              to="/register"
+            <a
+              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
               className="rounded-full bg-white px-5 py-2 text-sm font-medium text-neutral-950 hover:bg-neutral-200 transition-colors duration-300"
             >
               {t('nav.getStarted')}
-            </Link>
+            </a>
           </div>
         </div>
       </nav>
@@ -96,13 +96,13 @@ export default function Home() {
             {t('hero.desc')}
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              to="/register"
+            <a
+              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
               className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-8 py-3.5 text-base font-medium text-white hover:bg-blue-400 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               <Download className="h-5 w-5" />
               {t('hero.cta1')}
-            </Link>
+            </a>
             <Link
               to="/guestbook"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-8 py-3.5 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
@@ -237,13 +237,13 @@ export default function Home() {
             {t('cta.subtitle')}
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/register"
+            <a
+              href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
               className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-10 py-4 text-base font-medium text-white hover:bg-blue-400 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               <Download className="h-5 w-5" />
               {t('cta.button')}
-            </Link>
+            </a>
             <Link
               to="/guestbook"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 px-10 py-4 text-base font-medium text-white hover:bg-white/5 transition-all duration-300"
