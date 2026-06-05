@@ -28,6 +28,7 @@ app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+
 async function start() {
   await initDatabase()
   app.listen(PORT, () => {

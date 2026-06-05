@@ -3,10 +3,11 @@ import { open, Database } from 'sqlite'
 import path from 'path'
 import fs from 'fs'
 
-const DB_DIR = path.join(__dirname, '..', '..', 'database')
+// 使用 process.cwd() 確保路徑在執行目錄下（Render 的 backend/ 目錄）
+const DB_DIR = path.join(process.cwd(), 'data')
 const DB_PATH = path.join(DB_DIR, 'app.db')
 
-// 自動建立目錄（Render 部署時不存在此目錄）
+// 自動建立目錄（Render 部署時目錄不存在）
 if (!fs.existsSync(DB_DIR)) {
   fs.mkdirSync(DB_DIR, { recursive: true })
 }
@@ -84,6 +85,12 @@ export async function initDatabase() {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
   `)
+
+  // Auto-promote ADMIN_EMAIL to admin role on every startup
+  const adminEmail = process.env.ADMIN_EMAIL
+  if (adminEmail) {
+    await database.run("UPDATE users SET role='admin' WHERE email=?", [adminEmail])
+  }
 
   console.log('✅ Database initialized at', DB_PATH)
 }
