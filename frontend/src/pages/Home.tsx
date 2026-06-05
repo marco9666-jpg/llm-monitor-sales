@@ -52,23 +52,23 @@ export default function Home() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/70 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-3 font-semibold text-lg tracking-tight">
+          <div className="flex flex-shrink-0 items-center gap-3 font-semibold text-lg tracking-tight">
             <div className="rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 p-[3px]">
               <img src="/app-icon.png" alt="TokenMeter" className="h-7 w-7 rounded-xl" />
             </div>
             <span className="text-neutral-100">TokenMeter</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <LanguageSwitcher />
-            <Link to="/guestbook" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
+            <Link to="/guestbook" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
               {t('nav.feedback')}
             </Link>
-            <Link to="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
+            <Link to="/login" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
               {t('nav.login')}
             </Link>
             <a
               href="https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg"
-              className="rounded-full bg-white px-5 py-2 text-sm font-medium text-neutral-950 hover:bg-neutral-200 transition-colors duration-300"
+              className="rounded-full bg-white px-4 py-2 sm:px-5 text-sm font-medium text-neutral-950 hover:bg-neutral-200 transition-colors duration-300 whitespace-nowrap"
             >
               {t('nav.getStarted')}
             </a>
