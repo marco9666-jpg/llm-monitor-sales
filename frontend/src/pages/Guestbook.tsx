@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Send, MessageCircle, User, Clock, ArrowLeft, Heart } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Send, MessageCircle, User, Clock, ArrowLeft, Heart, LogOut } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
+import { useAuth } from '../hooks/useAuth'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 
 const API_URL = '/api'
@@ -16,6 +17,9 @@ interface GuestbookEntry {
 
 export default function Guestbook() {
   const { t } = useI18n()
+  const { user, isLoggedIn, logout } = useAuth()
+  const navigate = useNavigate()
+
   const [entries, setEntries] = useState<GuestbookEntry[]>([])
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -90,6 +94,25 @@ export default function Guestbook() {
               <ArrowLeft className="h-4 w-4" />
               {t('guestbook.back')}
             </Link>
+            {isLoggedIn ? (
+              <div className="hidden sm:flex items-center gap-3">
+                <div className="flex items-center gap-2 text-sm text-neutral-500">
+                  <User className="h-4 w-4" />
+                  <span>{user?.name}</span>
+                </div>
+                <button
+                  onClick={() => { logout(); navigate('/') }}
+                  className="flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-sm font-medium text-neutral-400 hover:bg-white/5 hover:text-white transition-all duration-300"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  {t('dashboard.logout')}
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
+                {t('nav.login')}
+              </Link>
+            )}
           </div>
         </div>
       </nav>

@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Shield, Zap, Lock, Server, BarChart3, Eye, Download, MessageSquare, Bell, Check } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Shield, Zap, Lock, Server, BarChart3, Eye, Download, MessageSquare, Bell, Check, LogOut, User } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
+import { useAuth } from '../hooks/useAuth'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 
 const DOWNLOAD_URL = 'https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg'
@@ -12,6 +13,8 @@ function trackDownload() {
 
 export default function Home() {
   const { t } = useI18n()
+  const { user, isLoggedIn, logout } = useAuth()
+  const navigate = useNavigate()
 
   const [subEmail, setSubEmail] = useState('')
   const [subName, setSubName] = useState('')
@@ -69,9 +72,25 @@ export default function Home() {
             <Link to="/guestbook" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
               {t('nav.feedback')}
             </Link>
-            <Link to="/login" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
-              {t('nav.login')}
-            </Link>
+            {isLoggedIn ? (
+              <div className="hidden sm:flex items-center gap-3">
+                <div className="flex items-center gap-2 text-sm text-neutral-500">
+                  <User className="h-4 w-4" />
+                  <span>{user?.name}</span>
+                </div>
+                <button
+                  onClick={() => { logout(); navigate('/') }}
+                  className="flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-sm font-medium text-neutral-400 hover:bg-white/5 hover:text-white transition-all duration-300"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  {t('dashboard.logout')}
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className="hidden sm:block text-sm font-medium text-neutral-400 hover:text-white transition-colors duration-300">
+                {t('nav.login')}
+              </Link>
+            )}
             <a
               href={DOWNLOAD_URL} onClick={trackDownload}
               className="rounded-full bg-white px-4 py-2 sm:px-5 text-sm font-medium text-neutral-950 hover:bg-neutral-200 transition-colors duration-300 whitespace-nowrap"
@@ -269,8 +288,16 @@ export default function Home() {
           </p>
           <div className="flex gap-6 text-xs text-neutral-600">
             <Link to="/guestbook" className="hover:text-neutral-400 transition-colors">{t('nav.feedback')}</Link>
-            <Link to="/login" className="hover:text-neutral-400 transition-colors">{t('footer.login')}</Link>
-            <Link to="/register" className="hover:text-neutral-400 transition-colors">{t('footer.register')}</Link>
+            {isLoggedIn ? (
+              <button onClick={() => { logout(); navigate('/') }} className="hover:text-neutral-400 transition-colors">
+                {t('dashboard.logout')}
+              </button>
+            ) : (
+              <>
+                <Link to="/login" className="hover:text-neutral-400 transition-colors">{t('footer.login')}</Link>
+                <Link to="/register" className="hover:text-neutral-400 transition-colors">{t('footer.register')}</Link>
+              </>
+            )}
           </div>
         </div>
       </footer>

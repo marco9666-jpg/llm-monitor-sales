@@ -426,6 +426,15 @@ const translations: Record<string, Record<string, string>> = {
     de: 'Anmeldung fehlgeschlagen',
     es: 'Error al iniciar sesión',
   },
+  'login.timeoutError': {
+    zh: '伺服器喚醒中，請稍後再試（最多 30 秒）',
+    en: 'Server is waking up, please try again (up to 30s)',
+    ja: 'サーバーを起動中です。しばらくしてから再試行してください（最大30秒）',
+    ko: '서버가 깨어나는 중입니다. 잠시 후 다시 시도해 주세요 (최대 30초)',
+    fr: 'Le serveur se réveille, veuillez réessayer (max 30s)',
+    de: 'Server wird hochgefahren, bitte später erneut versuchen (max. 30s)',
+    es: 'El servidor se está despertando, inténtelo de nuevo (hasta 30s)',
+  },
 
   // Register
   'register.title': {

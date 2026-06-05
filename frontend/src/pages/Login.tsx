@@ -34,7 +34,7 @@ export default function Login() {
       navigate('/')
     } catch (err: any) {
       if (err.name === 'TimeoutError') {
-        setError('伺服器喚醒中，請稍後再試（最多 30 秒）')
+        setError(t('login.timeoutError'))
       } else {
         setError(err.message)
       }
