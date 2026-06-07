@@ -5,7 +5,7 @@ import { useI18n } from '../i18n/I18nContext'
 import { useAuth } from '../hooks/useAuth'
 import LanguageSwitcher from '../components/LanguageSwitcher'
 
-const DOWNLOAD_URL = 'https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.0/TokenMeter_1.0.dmg'
+const DOWNLOAD_URL = 'https://github.com/marco9666-jpg/TokenMeter/releases/download/v1.1/TokenMeter_1.1.dmg'
 
 function trackDownload() {
   fetch('/api/downloads', { method: 'POST' }).catch(() => {})
