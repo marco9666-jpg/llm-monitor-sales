@@ -162,7 +162,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-3">
             <div className="group relative">
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
               <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-neutral-900/50">
@@ -178,6 +178,14 @@ export default function Home() {
               </div>
               <h3 className="mt-5 text-center text-lg font-medium text-white">{t('showcase.floating')}</h3>
               <p className="mt-1 text-center text-sm text-neutral-500">{t('showcase.floatingDesc')}</p>
+            </div>
+            <div className="group relative">
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-neutral-900/50">
+                <img src="/screenshots/breakdown.png" alt="Model Breakdown" className="w-full" />
+              </div>
+              <h3 className="mt-5 text-center text-lg font-medium text-white">{t('showcase.breakdown')}</h3>
+              <p className="mt-1 text-center text-sm text-neutral-500">{t('showcase.breakdownDesc')}</p>
             </div>
           </div>
         </div>
